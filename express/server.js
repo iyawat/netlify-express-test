@@ -2,23 +2,24 @@
 const express = require("express");
 const path = require("path");
 const serverless = require("serverless-http");
-// const app = express();
+const app = express();
+const bodyParser = require("body-parser");
 const cheerio = require("cheerio");
 const rp = require("request-promise");
 const thailotto = require("./thai-lotto");
 
-const server = express();
+// const server = express();
+// server.get("/", (req, res) => {
+//   res.send({
+//     status: "success",
+//     response:
+//       "Please go to https://github.com/iyawat/netlify-express-test#api for API usage",
+//   });
+// });
 
-server.get("/", (req, res) => {
-  console.log(thailotto.getData());
-  res.send({
-    status: "success",
-    response:
-      "Please go to https://github.com/iyawat/netlify-express-test#api for API usage",
-  });
-});
+const router = express.Router();
 
-server.get("/lotto/latest", (req, res) => {
+router.get("/lotto/latest", (req, res) => {
   // Get latest lottery URL
   rp({
     uri: `https://news.sanook.com/lotto/`,
@@ -44,22 +45,37 @@ server.get("/lotto/latest", (req, res) => {
   });
 });
 
-server.get("/lotto/:id", (req, res) => {
+router.get("/lotto/:id", (req, res) => {
   thailotto.getData(
     "https://news.sanook.com/lotto/check/" + req.params.id,
     res
   );
 });
 
-server.get("*", (req, res) => {
-  res.send(
-    {
-      status: "failure",
-      response: "route not found",
-    },
-    404
-  );
-});
+// server.get("*", (req, res) => {
+//   res.send(
+//     {
+//       status: "failure",
+//       response: "route not found",
+//     },
+//     404
+//   );
+// });
 
-module.exports = server;
-module.exports.handler = serverless(server);
+// module.exports = server;
+// module.exports.handler = serverless(server);
+
+router.get("/", (req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write("<h1>Hello from Express.js!</h1>");
+  res.end();
+});
+router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
+router.post("/", (req, res) => res.json({ postBody: req.body }));
+
+app.use(bodyParser.json());
+app.use("/.netlify/functions/server", router); // path must route to lambda
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+
+module.exports = app;
+module.exports.handler = serverless(app);
