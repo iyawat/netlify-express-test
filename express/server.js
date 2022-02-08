@@ -14,11 +14,11 @@ server.get("/", (req, res) => {
   res.send({
     status: "success",
     response:
-      "Please go to https://github.com/rayriffy/thai-lotto-api#api for API usage",
+      "Please go to https://github.com/iyawat/netlify-express-test#api for API usage",
   });
 });
 
-server.get("/latest", (req, res) => {
+server.get("/lotto/latest", (req, res) => {
   // Get latest lottery URL
   rp({
     uri: `https://news.sanook.com/lotto/`,
@@ -41,38 +41,6 @@ server.get("/latest", (req, res) => {
       ).attr("href");
     }
     thailotto.getData(lottoUrl, res);
-  });
-});
-
-server.get("/list/:page?", (req, res) => {
-  let page = req.params.page || 1;
-  rp({
-    uri: `https://news.sanook.com/lotto/archive/page/${page}`,
-    transform: (body) => {
-      return cheerio.load(body);
-    },
-  }).then(($) => {
-    let pastLottos = [];
-    // List id
-    $(
-      "body > div.wrapper > div > div.box-cell.box-cell--lotto.content > div > div > div > article.archive--lotto > div > div > a"
-    ).each((i, elem) => {
-      pastLottos.push({});
-      pastLottos[i].id = $(elem).attr("href").split("/")[5];
-      pastLottos[i].url = "/lotto/" + pastLottos[i].id;
-    });
-    // List name
-    $(
-      "body > div.wrapper > div > div.box-cell.box-cell--lotto.content > div > div > div > article.archive--lotto > div.archive--lotto__body > div > a > div > h3.archive--lotto__head-lot"
-    ).each((i, elem) => {
-      pastLottos[i].date = $(elem)
-        .text()
-        .substr($(elem).text().indexOf("ตรวจหวย") + 8);
-    });
-    res.send({
-      status: "success",
-      response: pastLottos,
-    });
   });
 });
 

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 // app.listen(3000, () => console.log('Local app listening on port 3000!'));
 
 const server = require("./express/server");
-const { PORT = 1200 } = process.env;
+const { PORT = 3000 } = process.env;
 
 server
   .use(bodyParser.json())
