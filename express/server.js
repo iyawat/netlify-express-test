@@ -6,9 +6,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const cheerio = require("cheerio");
 const rp = require("request-promise");
+
 const thailotto = require("./thai-lotto");
 const kasetprice = require("./kasetprice");
-const { urlencoded } = require("body-parser");
+require("dotenv").config();
 
 const router = express.Router();
 
