@@ -7,15 +7,8 @@ const bodyParser = require("body-parser");
 const cheerio = require("cheerio");
 const rp = require("request-promise");
 const thailotto = require("./thai-lotto");
-
-// const server = express();
-// server.get("/", (req, res) => {
-//   res.send({
-//     status: "success",
-//     response:
-//       "Please go to https://github.com/iyawat/netlify-express-test#api for API usage",
-//   });
-// });
+const kasetprice = require("./kasetprice");
+const { urlencoded } = require("body-parser");
 
 const router = express.Router();
 
@@ -52,18 +45,13 @@ router.get("/lotto/:id", (req, res) => {
   );
 });
 
-// server.get("*", (req, res) => {
-//   res.send(
-//     {
-//       status: "failure",
-//       response: "route not found",
-//     },
-//     404
-//   );
-// });
-
-// module.exports = server;
-// module.exports.handler = serverless(server);
+router.get("/kasetprice/:id", (req, res) => {
+  // console.log("https://www.kasetprice.com/ราคา/" + req.params.id + "/วันนี้");
+  kasetprice.getData(
+    encodeURI("https://www.kasetprice.com/ราคา/" + req.params.id + "/วันนี้"),
+    res
+  );
+});
 
 router.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
