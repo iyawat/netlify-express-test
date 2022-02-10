@@ -11,7 +11,7 @@ const Discord = require("discord.js");
 const prefix = "$";
 const bot = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 bot.on("ready", () => {
-  console.log("Discord BOT ready!");
+  console.log("DISCORD BOT READY!");
 });
 
 bot.on("message", (message) => {
