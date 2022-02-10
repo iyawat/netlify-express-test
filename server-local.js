@@ -32,7 +32,7 @@ bot.on("messageCreate", function (message) {
     const sum = numArgs.reduce((counter, x) => (counter += x));
     message.reply(`The sum of all the arguments you provided is ${sum}!`);
   } else if (command === "ราคา") {
-    getPriceData("พริก").then((data) => {
+    getPriceData(args).then((data) => {
       let res = data.map((x) => {
         return `${x[0]} ราคา ${x[1]} ${x[2]}`;
       });
