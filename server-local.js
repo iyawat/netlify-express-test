@@ -8,12 +8,12 @@ app.listen(3000, () => console.log("Local app listening on port 3000!"));
 
 const Discord = require("discord.js");
 
+const bot = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const prefix = "$";
+
 bot.on("ready", () => {
   console.log("DISCORD BOT READY!");
 });
-
-const bot = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
-const prefix = "$";
 
 bot.on("messageCreate", function (message) {
   if (message.author.bot) return;
