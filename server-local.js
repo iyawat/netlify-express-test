@@ -12,10 +12,10 @@ bot.on("ready", () => {
   console.log("DISCORD BOT READY!");
 });
 
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const bot = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = "$";
 
-client.on("messageCreate", function (message) {
+bot.on("messageCreate", function (message) {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
