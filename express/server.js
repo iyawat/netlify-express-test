@@ -47,7 +47,6 @@ router.get("/lotto/:id", (req, res) => {
 });
 
 router.get("/kasetprice/:id", (req, res) => {
-  // console.log("https://www.kasetprice.com/ราคา/" + req.params.id + "/วันนี้");
   kasetprice.getData(
     encodeURI("https://www.kasetprice.com/ราคา/" + req.params.id + "/วันนี้"),
     res
