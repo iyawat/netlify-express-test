@@ -8,13 +8,14 @@ app.listen(3000, () => console.log("Local app listening on port 3000!"));
 
 const Discord = require("discord.js");
 
-const prefix = "$";
-const bot = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 bot.on("ready", () => {
   console.log("DISCORD BOT READY!");
 });
 
-bot.on("message", (message) => {
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const prefix = "$";
+
+client.on("messageCreate", function (message) {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -29,11 +30,6 @@ bot.on("message", (message) => {
     const numArgs = args.map((x) => parseFloat(x));
     const sum = numArgs.reduce((counter, x) => (counter += x));
     message.reply(`The sum of all the arguments you provided is ${sum}!`);
-  } else if (command === "ราคา") {
-    kasetprice.getData(
-      encodeURI("https://www.kasetprice.com/ราคา/" + args[0] + "/วันนี้"),
-      res
-    );
   }
 });
 
