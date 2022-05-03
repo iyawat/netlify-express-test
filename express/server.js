@@ -9,6 +9,7 @@ const rp = require("request-promise");
 
 const thailotto = require("./thai-lotto");
 const kasetprice = require("./kasetprice");
+const commo = require("./commo");
 require("dotenv").config();
 
 const router = express.Router();
@@ -44,6 +45,14 @@ router.get("/lotto/:id", (req, res) => {
     "https://news.sanook.com/lotto/check/" + req.params.id,
     res
   );
+});
+
+router.get("/gold", (req, res) => {
+  commo.getGoldPrice(encodeURI("https://www.sanook.com/money/goldrate/"), res);
+});
+
+router.get("/oil", (req, res) => {
+  commo.getOilPrice(encodeURI("https://www.sanook.com/money/oil-price/"), res);
 });
 
 router.get("/kasetprice/:id", (req, res) => {
