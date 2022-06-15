@@ -1,6 +1,141 @@
 <!DOCTYPE html>
-<object
-  type="text/html"
-  data="/.netlify/functions/server"
-  style="width:100%;height:100%;"
->
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="text/javascript">
+      function display_c() {
+        var x = new Date();
+        document.getElementById("ct").innerHTML = x.toLocaleString("th-TH", {
+          timeZone: "Asia/Bangkok",
+        });
+        loadDoc();
+
+        mytime = setTimeout(function () {
+          var x = new Date();
+          document.getElementById("ct").innerHTML = x.toLocaleString("th-TH", {
+            timeZone: "Asia/Bangkok",
+          });
+          loadDoc();
+        }, 30000);
+      }
+
+      function loadDoc() {
+        console.log("Loading");
+
+        $.get(
+          "http://localhost:3000/.netlify/functions/server/exchangeRate",
+          function (data, status) {
+            let json = data.response.data;
+            let key = Object.keys(json).sort();
+            // console.log(json, key.length);
+            let content = "";
+
+            for (let i = 0; i < key.length; i++) {
+              // console.log(json[key[i]]);
+              let j = json[key[i]];
+
+              let bot = j.filter((x) => x.Source == "BOT");
+              let scb = j.filter((x) => x.Source == "SCB");
+              let bbl = j.filter((x) => x.Source == "BBL");
+
+              let cur =
+                bot.length >= 1
+                  ? bot[0].Currency
+                  : bbl.length >= 1
+                  ? bbl[0].Currency
+                  : scb[0].Currency;
+
+              let b1 = bot.length >= 1 ? bot[0].BuySightBill : "-";
+              let b2 = bot.length >= 1 ? bot[0].SellAvg : "-";
+              let bb1 = bbl.length >= 1 ? bbl[0].BuySightBill : "-";
+              let bb2 = bbl.length >= 1 ? bbl[0].SellAvg : "-";
+              let s1 = scb.length >= 1 ? scb[0].BuySightBill : "-";
+              let s2 = scb.length >= 1 ? scb[0].SellAvg : "-";
+
+              content =
+                "<tr><td>" +
+                key[i] +
+                "</td><td>" +
+                cur +
+                "</td><td>" +
+                b1 +
+                "</td><td>" +
+                b2 +
+                "</td><td>" +
+                bb1 +
+                "</td><td>" +
+                bb2 +
+                "</td><td>" +
+                s1 +
+                "</td><td>" +
+                s2 +
+                "</td></tr>";
+
+              $("#fxbody").append(content);
+            }
+          }
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <body onLoad="display_c()">
+      <div id="fxrate" class="fxrate">
+        <div class="wrap-table100">
+          <h1>อัตราแลกเปลี่ยนเงิน ประจำวันที่</h1>
+          <h1 id="ct"></h1>
+
+          <table id="fxtable" class="table">
+            <thead classs="header">
+              <tr>
+                <td rowspan="2">Symbol</td>
+                <td rowspan="2">Currency</td>
+                <td colspan="2">BOT</td>
+                <td colspan="2">BBL</td>
+                <td colspan="2">SCB</td>
+              </tr>
+              <tr>
+                <td>Selling</td>
+                <td>Buying</td>
+                <td>Selling</td>
+                <td>Buying</td>
+                <td>Selling</td>
+                <td>Buying</td>
+              </tr>
+            </thead>
+            <tbody id="fxbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </body>
+
+    <style>
+      html,
+      body {
+        font-family: "IBM Plex Sans Thai Looped", sans-serif;
+      }
+
+      table {
+        text-align: center;
+        width: 100%;
+        border-radius: 20px;
+      }
+      thead {
+        background-color: #f36f27;
+        color: #fff;
+        font-size: 1.2em;
+        font-weight: 700;
+      }
+      table > tr > td {
+        padding: 10px;
+      }
+    </style>
+  </body>
+</html>

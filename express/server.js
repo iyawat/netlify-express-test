@@ -10,6 +10,7 @@ const rp = require("request-promise");
 const thailotto = require("./thai-lotto");
 const kasetprice = require("./kasetprice");
 const commo = require("./commo");
+const exchangeRate = require("./exchangerate");
 require("dotenv").config();
 
 const router = express.Router();
@@ -53,6 +54,15 @@ router.get("/gold", (req, res) => {
 
 router.get("/oil", (req, res) => {
   commo.getOilPrice(encodeURI("https://www.sanook.com/money/oil-price/"), res);
+});
+
+router.get("/exchangeRate", (req, res) => {
+  exchangeRate.getExchangeRate(
+    encodeURI(
+      "https://www.bot.or.th/english/_layouts/application/exchangerate/exchangerate.aspx/"
+    ),
+    res
+  );
 });
 
 router.get("/kasetprice/:id", (req, res) => {
