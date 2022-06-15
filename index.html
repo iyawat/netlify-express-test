@@ -30,7 +30,7 @@
         console.log("Loading");
 
         $.get(
-          "http://localhost:3000/.netlify/functions/server/exchangeRate",
+          "https://sofin-webscraper.netlify.app/.netlify/functions/server/exchangeRate",
           function (data, status) {
             let json = data.response.data;
             let key = Object.keys(json).sort();
