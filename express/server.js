@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const cheerio = require("cheerio");
 const rp = require("request-promise");
 
+const cors = require("cors");
+
 const thailotto = require("./thai-lotto");
 const kasetprice = require("./kasetprice");
 const commo = require("./commo");
@@ -80,6 +82,7 @@ router.get("/", (req, res) => {
 router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));

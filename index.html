@@ -12,25 +12,26 @@
     <script type="text/javascript">
       function display_c() {
         var x = new Date();
+
         document.getElementById("ct").innerHTML = x.toLocaleString("th-TH", {
           timeZone: "Asia/Bangkok",
         });
         loadDoc();
 
-        mytime = setTimeout(function () {
+        setInterval(function () {
           var x = new Date();
           document.getElementById("ct").innerHTML = x.toLocaleString("th-TH", {
             timeZone: "Asia/Bangkok",
           });
-          loadDoc();
-        }, 30000);
+          // loadDoc();
+        }, 1000);
       }
 
       function loadDoc() {
         console.log("Loading");
 
         $.get(
-          "https://sofin-webscraper.netlify.app/.netlify/functions/server/exchangeRate",
+          "https://https://sofin-webscraper.netlify.app/.netlify/functions/server/exchangeRate",
           function (data, status) {
             let json = data.response.data;
             let key = Object.keys(json).sort();
@@ -89,8 +90,8 @@
     <body onLoad="display_c()">
       <div id="fxrate" class="fxrate">
         <div class="wrap-table100">
-          <h1>อัตราแลกเปลี่ยนเงิน ประจำวันที่</h1>
-          <h1 id="ct"></h1>
+          <h1 style="display: inline-block">อัตราแลกเปลี่ยนเงิน ประจำวันที่</h1>
+          <h1 style="display: inline-block" id="ct"></h1>
 
           <table id="fxtable" class="table">
             <thead classs="header">
