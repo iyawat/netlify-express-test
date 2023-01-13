@@ -12,7 +12,7 @@ const getGoldPrice = (url, res) => {
     let data = [];
 
     $(
-      "#__next > div.fullLayout > div:nth-child(5) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-4046716835.SectionRecentPrice > div > div:nth-child(1) > div > div:nth-child(2) > div.col-7 > b"
+      "#__next > div.fullLayout > div:nth-child(6) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-722160545.SectionRecentPrice > div > div:nth-child(1) > div > div:nth-child(2) > div.col-7 > b"
     ).each((i, elem) => {
       // console.log("E: ", $(elem).text().replace(/ /g, "").split("\n"));
       let d = $(elem).text().replace(/ /g, "").split("\n");
@@ -20,7 +20,7 @@ const getGoldPrice = (url, res) => {
     });
 
     $(
-      "#__next > div.fullLayout > div:nth-child(5) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-4046716835.SectionRecentPrice > div > div:nth-child(1) > div > div:nth-child(3) > div.col-7 > b"
+      "#__next > div.fullLayout > div:nth-child(6) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-722160545.SectionRecentPrice > div > div:nth-child(1) > div > div:nth-child(3) > div.col-7 > b"
     ).each((i, elem) => {
       // console.log("E: ", $(elem).text().replace(/ /g, "").split("\n"));
       let d = $(elem).text().replace(/ /g, "").split("\n");
@@ -28,7 +28,7 @@ const getGoldPrice = (url, res) => {
     });
 
     $(
-      "#__next > div.fullLayout > div:nth-child(5) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-4046716835.SectionRecentPrice > div > div:nth-child(2) > div > div:nth-child(2) > div.col-7 > b"
+      "#__next > div.fullLayout > div:nth-child(6) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-722160545.SectionRecentPrice > div > div:nth-child(2) > div > div:nth-child(2) > div.col-7 > b"
     ).each((i, elem) => {
       // console.log("E: ", $(elem).text().replace(/ /g, "").split("\n"));
       let d = $(elem).text().replace(/ /g, "").split("\n");
@@ -36,7 +36,7 @@ const getGoldPrice = (url, res) => {
     });
 
     $(
-      "#__next > div.fullLayout > div:nth-child(5) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-4046716835.SectionRecentPrice > div > div:nth-child(2) > div > div:nth-child(3) > div.col-7 > b"
+      "#__next > div.fullLayout > div:nth-child(6) > div.jsx-3419068704.GoldRateHomePage > div > div.col-12.col-lg-8 > div.jsx-722160545.SectionRecentPrice > div > div:nth-child(2) > div > div:nth-child(3) > div.col-7 > b"
     ).each((i, elem) => {
       // console.log("E: ", $(elem).text().replace(/ /g, "").split("\n"));
       let d = $(elem).text().replace(/ /g, "").split("\n");
