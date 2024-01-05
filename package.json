@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/neverendingqs/netlify-express#readme",
   "dependencies": {
-    "@slack/bolt": "^3.10.0",
-    "axios": "^0.27.2",
+    "@slack/bolt": "^3.15.0",
+    "axios": "^1.6.4",
     "cheerio": "^1.0.0-rc.10",
     "cors": "^2.8.5",
     "discord.js": "^13.6.0",
